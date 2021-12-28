@@ -17,7 +17,7 @@
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
-require("dotnet").config();
+require("dotenv").config();
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const mnemonic = process.env.MNEMONIC.toString().trim();
 
@@ -35,12 +35,12 @@ module.exports = {
 	networks: {
 		development: {
 			host: "127.0.0.1",
-			port: 7545,
+			port: 9545,
 			network_id: "*",
 		},
 		matic: {
 			provider: () => {
-				new HDWalletProvider(
+				return new HDWalletProvider(
 					mnemonic,
 					"https://matic-mumbai.chainstacklabs.com"
 				);
@@ -60,7 +60,7 @@ module.exports = {
 	// Configure your compilers
 	compilers: {
 		solc: {
-			version: "0.8.10", // Fetch exact version from solc-bin (default: truffle's version)
+			version: "^0.6.0", // Fetch exact version from solc-bin (default: truffle's version)
 			// docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
 			settings: {
 				// See the solidity docs for advice about optimization and evmVersion
